@@ -1,0 +1,490 @@
+{
+	"info": {
+		"_postman_id": "997f13f8-fc1c-4c3c-954e-74e82d14f608",
+		"name": "New Timesheet tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"tom\",\r\n    \"email\" : \"tom@gmail.com\",\r\n    \"password\" : \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/user-register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user-register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set('jwt',pm.response.json().jwtToken)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"nit@gmail.com\",\r\n    \"password\" : \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/user-login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user-login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Timesheet details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjIwNjRjYjYzODkwMDU4YzM3MzM5ZTU4IiwiaWF0IjoxNjQ0NjU5ODE3LCJleHAiOjE2NDQ2OTU4MTd9.amqt5BdULI9yS2oa0_VjNmfYxwICgsM2SZEbX9FZq2A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"dhruv\",\r\n    \"type\":\"API testing\",\r\n    \"entryDate\":\"2022-1-12\",\r\n    \"hours\":5,\r\n    \"notes\":\"Testing on front\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/timesheet-details",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"timesheet-details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjIwNjRjYjYzODkwMDU4YzM3MzM5ZTU4IiwiaWF0IjoxNjQ0NTk1MzE1LCJleHAiOjE2NDQ2MTMzMTV9.pGrZJ4viN5dRHXlkqOUZOtpeg7pq30NSNSfso76GROM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"nithish\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/update/62064cb63890058c37339e58",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"update",
+						"62064cb63890058c37339e58"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjIwNjhmZjUzMWYwMGZjZjdkNGYxMDFjIiwiaWF0IjoxNjQ0NTk3MjYyLCJleHAiOjE2NDQ2MTUyNjJ9.yp-fVxv_iNHA-JcsodC8CeAjhC19wWM8XIgVjDCWiz0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/delete/62068ff531f00fcf7d4f101c",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"delete",
+						"62068ff531f00fcf7d4f101c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All-timesheets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/get-all-timesheets",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"get-all-timesheets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjIwNjRjYjYzODkwMDU4YzM3MzM5ZTU4IiwiaWF0IjoxNjQ0NjU5ODE3LCJleHAiOjE2NDQ2OTU4MTd9.amqt5BdULI9yS2oa0_VjNmfYxwICgsM2SZEbX9FZq2A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/get-by-id/62064cb63890058c37339e58",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"get-by-id",
+						"62064cb63890058c37339e58"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Date filter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjIwNjRjYjYzODkwMDU4YzM3MzM5ZTU4IiwiaWF0IjoxNjQ0NjU5ODE3LCJleHAiOjE2NDQ2OTU4MTd9.amqt5BdULI9yS2oa0_VjNmfYxwICgsM2SZEbX9FZq2A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/date-filter/62064cb63890058c37339e58?date=2022-02-07",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"date-filter",
+						"62064cb63890058c37339e58"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2022-02-07"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Week reports",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjIwNjRjYjYzODkwMDU4YzM3MzM5ZTU4IiwiaWF0IjoxNjQ0NjU5ODE3LCJleHAiOjE2NDQ2OTU4MTd9.amqt5BdULI9yS2oa0_VjNmfYxwICgsM2SZEbX9FZq2A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/week-report/62064cb63890058c37339e58",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"week-report",
+						"62064cb63890058c37339e58"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Month reports",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjIwNjRjYjYzODkwMDU4YzM3MzM5ZTU4IiwiaWF0IjoxNjQ0NjU5ODE3LCJleHAiOjE2NDQ2OTU4MTd9.amqt5BdULI9yS2oa0_VjNmfYxwICgsM2SZEbX9FZq2A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/month-report/62064cb63890058c37339e58",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"month-report",
+						"62064cb63890058c37339e58"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Week details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjIwNjRjYjYzODkwMDU4YzM3MzM5ZTU4IiwiaWF0IjoxNjQ0NjU5ODE3LCJleHAiOjE2NDQ2OTU4MTd9.amqt5BdULI9yS2oa0_VjNmfYxwICgsM2SZEbX9FZq2A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/api/week-details/62064cb63890058c37339e58?week=6",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"week-details",
+						"62064cb63890058c37339e58"
+					],
+					"query": [
+						{
+							"key": "week",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Monnth details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjIwNjRjYjYzODkwMDU4YzM3MzM5ZTU4IiwiaWF0IjoxNjQ0NjU5ODE3LCJleHAiOjE2NDQ2OTU4MTd9.amqt5BdULI9yS2oa0_VjNmfYxwICgsM2SZEbX9FZq2A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/api/month-details/62064cb63890058c37339e58?month=12",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"month-details",
+						"62064cb63890058c37339e58"
+					],
+					"query": [
+						{
+							"key": "month",
+							"value": "12"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sort",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjIwNjRjYjYzODkwMDU4YzM3MzM5ZTU4IiwiaWF0IjoxNjQ0OTg2MTY0LCJleHAiOjE2NDUwMjIxNjR9.s1vHMvf_ftR1wnag8ZeYoZVxYFUHpB11yAzXC3Pq0FE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/api/sort/62064cb63890058c37339e58?sort=-name,-hours",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"sort",
+						"62064cb63890058c37339e58"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "-name,-hours"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
